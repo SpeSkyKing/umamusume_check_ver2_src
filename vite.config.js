@@ -8,4 +8,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        port:5173,
+        proxy: {
+          '/app': 'http://localhost',
+        },
+      },
 });
