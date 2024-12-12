@@ -56,6 +56,15 @@ return new class extends Migration
             $table->boolean('role');
             $table->primary('user_id');
         });
+
+        Schema::create('live_table', function (Blueprint $table) {
+            $table->integer('live_id');
+            $table->string('live_name');
+            $table->string('composer');
+            $table->string('arrager');
+            $table->string('phrase');
+            $table->primary('live_id');
+        });
     }
 
     /**
@@ -63,10 +72,18 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('regist_umamusume_race_table');
+
+        Schema::dropIfExists('user_security_table');
+        Schema::dropIfExists('user_history_table');
+        Schema::dropIfExists('regist_umamusume_table');
         Schema::dropIfExists('umamusume_acter_table');
         Schema::dropIfExists('scenario_race_table');
+        Schema::dropIfExists('vocal_umamusume_table');
+
         Schema::dropIfExists('umamusume_table');
         Schema::dropIfExists('race_table');
         Schema::dropIfExists('user_table');
+        Schema::dropIfExists('live_table');
     }
 };
