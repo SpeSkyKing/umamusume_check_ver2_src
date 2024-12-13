@@ -16,25 +16,25 @@ class MakeUmamusumeData extends Seeder
     {
         //JSONファイルを処理する処置を追加
 
-        $json_Files = Storage::disk('private')->get('json/Umamusume.json');
+        $json_Files = json_decode(Storage::disk('private')->get('json/Umamusume.json'));
 
-        var_dump(json_decode($json_Files));
-
-        // foreach($json_Files as $object){
-        //     $umamusume  = new Umamusumetable();
-        //     $umamusume->umamusume_id = 1;
-        //     $umamusume->umamusume_name = 'スペシャルウィーク';
-        //     $umamusume->turf_aptitude = 'A';
-        //     $umamusume->dirt_aptitude = 'G';
-        //     $umamusume->front_runner_aptitude = 'G';
-        //     $umamusume->early_foot_aptitude = 'A';
-        //     $umamusume->midfield_aptitude = 'A';
-        //     $umamusume->closer_aptitude = 'C';
-        //     $umamusume->sprint_aptitude = 'F';
-        //     $umamusume->mile_aptitude = 'C';
-        //     $umamusume->classic_aptitude = 'A';
-        //     $umamusume->long_distance_aptitude = 'A';
-        //     $umamusume->save();
-        // }
+        foreach($json_Files as $index => $object){
+            if(!Umamusume::where('umamusume_name',$object->名前)->exists()){
+                $umamusume  = new Umamusume();
+                $umamusume->umamusume_id = int($index);
+                $umamusume->umamusume_name = $object->名前;
+                $umamusume->turf_aptitude = $object->芝;
+                $umamusume->dirt_aptitude = $object->ダート;
+                $umamusume->front_runner_aptitude = $object->逃げ;
+                $umamusume->early_foot_aptitude = $object->先行;
+                $umamusume->midfield_aptitude = $object->差し;
+                $umamusume->closer_aptitude = $object->追込;
+                $umamusume->sprint_aptitude = $object->短距離;
+                $umamusume->mile_aptitude = $object->マイル;
+                $umamusume->classic_aptitude = $object->中距離;
+                $umamusume->long_distance_aptitude = $object->長距離;
+                $umamusume->save();
+            }  
+        }
     }
 }
