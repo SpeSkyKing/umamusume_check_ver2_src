@@ -14,7 +14,10 @@ class UmamusumeActer extends Model
 
     public $timestamps = false;
     
+     /**
+     * 1対1を明示的に表示
+     */
     public function Umamusume(){
-        return $this->hasOne(Umamusume::class);   
+        return $this->hasOne(Umamusume::class,'umamusume_id','umamusume_id');   
     }
 }

@@ -14,11 +14,31 @@ class Race extends Model
 
     public $timestamps = false;
 
-    public function RegistUmamusume(){
-        return $this->belongTo(RegistUmamusume::class);   
+    /**
+     * 1対多を明示的に表示
+     */
+    public function RegistUmamusumeEntry(){
+        return $this->belongTo(RegistUmamusumeEntry::class,'race_id','race_id');   
     }
 
+    /**
+     * 1対多を明示的に表示
+     */
     public function ScenarioRace(){
-        return $this->belongTo(ScenarioRace::class);   
+        return $this->belongTo(ScenarioRace::class,'race_id','race_id');   
+    }
+
+    /**
+     * 1対多対1を明示的に表示
+     */
+    public function RegistUmamusume(){
+        return $this->hasManyThrough(RegistUmamusume::class,RegistUmamusumeEntry::class);
+    }
+
+     /**
+     * 1対多対1を明示的に表示
+     */
+    public function Race(){
+        return $this->hasManyThrough(Race::class,ScenarioRace::class);
     }
 }

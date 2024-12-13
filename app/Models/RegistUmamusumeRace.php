@@ -11,4 +11,18 @@ class RegistUmamusumeRace extends Model
 
     public $timestamps = false;
     
+    /**
+     * 多対1を明示的に表示
+     */
+    public function RegistUmamusume(){
+        return RegistUmamusume::where('umamusume_id',$this->umamusume_id)
+        ->where('race_id',$this->race_id)->first();
+    }
+
+    /**
+     * 多対1を明示的に表示
+     */
+    public function Race(){
+        return $this->hasOne(Race::class,'race_id','race_id');   
+    }
 }
