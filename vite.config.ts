@@ -5,16 +5,25 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+      laravel({
+      input: 'resources/js/app.tsx',    // jsx のエントリポイントを記述
+      refresh: true,
+      }),
+    react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'resources/js'),
     },
   },
   server: {
+    host: '0.0.0.0', 
     port:5173,
     proxy: {
-      '/app': 'http://localhost',
+      '/app': {
+        target: 'http://localhost', // Laravelが動作しているサーバー
+        changeOrigin: true,
+      }
     },
   },
 });
