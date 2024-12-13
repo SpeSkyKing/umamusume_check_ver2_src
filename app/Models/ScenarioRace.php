@@ -12,7 +12,17 @@ class ScenarioRace extends Model
 
     public $timestamps = false;
     
+    /**
+     * 多対1を明示的に表示
+     */
     public function Umamusume(){
-        return $this->hasOne(Umamusume::class);   
+        return $this->hasOne(Umamusume::class,'umamusume_id','umamusume_id');   
+    }
+
+    /**
+     * 多対1を明示的に表示
+     */
+    public function Race(){
+        return $this->hasOne(Race::class,'race_id','race_id');   
     }
 }

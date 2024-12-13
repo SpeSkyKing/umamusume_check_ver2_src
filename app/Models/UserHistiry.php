@@ -14,8 +14,11 @@ class UserHistiry extends Model
 
     public $timestamps = false;
 
+     /**
+     * 多対1を明示的に表示
+     */
     public function User(){
-        return $this->hasOne(UserPersonal::class);   
+        return $this->hasOne(UserPersonal::class,'user_id','user_id');   
     }
     
 }

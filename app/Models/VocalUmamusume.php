@@ -11,11 +11,17 @@ class VocalUmamusume extends Model
 
     public $timestamps = false;
     
+    /**
+     * 多対1を明示的に表示
+     */
     public function Live(){
-        return $this->hasOne(Live::class);   
+        return $this->hasOne(Live::class,'live_id','live_id');   
     }
 
+    /**
+     * 多対1を明示的に表示
+     */
     public function Umamusume(){
-        return $this->hasOne(Umamusume::class);   
+        return $this->hasOne(Umamusume::class,'user_id','user_id');   
     }
 }

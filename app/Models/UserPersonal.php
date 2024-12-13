@@ -14,15 +14,31 @@ class UserPersonal extends Model
 
     public $timestamps = false;
     
+    /**
+     * 1対多を明示的に表示
+     */
     public function RegistUmamusume(){
-        return $this->belongTo(RegistUmamusume::class);   
+        return $this->belongTo(RegistUmamusume::class,'user_id','user_id');   
     }
 
+    /**
+     * 1対1を明示的に表示
+     */
     public function UserHistory(){
-        return $this->hasOne(UserHistory::class);   
+        return $this->hasOne(UserHistory::class,'user_id','user_id');   
     }
 
+    /**
+     * 1対1を明示的に表示
+     */
     public function UserSecurity(){
-        return $this->hasOne(UserSecurity::class);   
+        return $this->hasOne(UserSecurity::class,'user_id','user_id');   
+    }
+
+    /**
+     * 1対多対1を明示的に表示
+     */
+    public function Umamusume(){
+        return $this->hasManyThrough(Umamusume::class,RegistUmamusume::class);
     }
 }

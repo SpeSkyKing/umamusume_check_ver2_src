@@ -14,7 +14,17 @@ class Live extends Model
 
     public $timestamps = false;
  
+     /**
+     * 1対多を明示的に表示
+     */
     public function VocalUmamusume(){
-        return $this->belongTo(VocalUmamusume::class);   
+        return $this->belongTo(VocalUmamusume::class,'live_id','live_id');   
+    }
+
+     /**
+     * 1対多対1を明示的に表示
+     */
+    public function Umamusume(){
+        return $this->hasManyThrough(Umamusume::class,VocalUmamusume::class);
     }
 }
